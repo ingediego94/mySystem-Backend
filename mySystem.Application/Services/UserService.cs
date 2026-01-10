@@ -21,7 +21,7 @@ public class UserService : IUserService
     // -------------------------------------------------
     
     // Get All:
-    public async Task<IEnumerable<UserResponseDto>> GetAllAsync()
+    public async Task<IEnumerable<UserResponseDto?>> GetAllAsync()
     {
         var users = await _userRepository.GetAllAsync();
         return _mapper.Map<IEnumerable<UserResponseDto>>(users);
@@ -37,14 +37,34 @@ public class UserService : IUserService
     
     
     // Update:
-    public Task<bool> UpdateAsync(UserUpdateDto dto)
+    public async Task<UserResponseDto?> UpdateAsync(int id, UserUpdateDto dto)
     {
-        throw new NotImplementedException();
+
+        if (dto == null)
+            throw new ArgumentNullException(nameof(dto));
+        
+        var user = await _userRepository.GetByIdAsync(id);
+
+        if (user == null)
+            return null;
+
+        _mapper.Map(dto, user);
+        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
+        user.UpdatedAt = DateTime.UtcNow;
+
+        var updatedUser = await _userRepository.UpdateAsync(user);
+        return _mapper.Map<UserResponseDto>(updatedUser);
     }
 
     // Delete:
-    public Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var exists = await _userRepository.GetByIdAsync(id);
+        
+        if(exists == null) 
+            return false;
+
+        var toDelete = await _userRepository.DeleteAsync(exists);
+        return true;
     }
 }

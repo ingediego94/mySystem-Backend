@@ -5,8 +5,8 @@ namespace mySystem.Application.Interfaces;
 
 public interface IUserService
 {
-    Task<IEnumerable<UserResponseDto>> GetAllAsync();
+    Task<IEnumerable<UserResponseDto?>> GetAllAsync();
     Task<UserResponseDto?> GetById(int id);
-    Task<bool> UpdateAsync(UserUpdateDto dto);
+    Task<UserResponseDto?> UpdateAsync(int id, UserUpdateDto dto);
     Task<bool> DeleteAsync(int id);
 }
