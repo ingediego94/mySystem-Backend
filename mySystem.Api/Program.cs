@@ -70,7 +70,7 @@ builder.Services.AddAuthentication(options =>
 // Button of AUTHORIZE
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = "cursos API", Version = "v1" });
+    c.SwaggerDoc("v1", new() { Title = "mySystem API", Version = "v1" });
 
     // Set autorización with JWT
     c.AddSecurityDefinition("Bearer", new()
