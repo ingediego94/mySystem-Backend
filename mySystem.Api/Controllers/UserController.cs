@@ -23,7 +23,7 @@ public class UserController : ControllerBase
     // ------------------------------------------------
     
     // GetAll:
-    // [Authorize(Roles = "Admin, User")]
+    [Authorize(Roles = "Admin, User")]
     [HttpGet("getAll")]
     public async Task<IActionResult> GetAll()
     {
@@ -39,7 +39,7 @@ public class UserController : ControllerBase
     
     
     // Get By Id:
-    // [Authorize(Roles="Admin, User")]
+    [Authorize(Roles="Admin, User")]
     [HttpGet("getById/{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -55,7 +55,7 @@ public class UserController : ControllerBase
     
     
     // Update:
-    // [Authorize(Roles = "Admin, User")]
+    [Authorize(Roles = "Admin, User")]
     [HttpPut("update/{id:int}")]
     public async Task<IActionResult> Update(int id, [FromBody] UserUpdateDto dto)
     {
@@ -77,7 +77,7 @@ public class UserController : ControllerBase
         
     
     // Delete:
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [HttpDelete("delete/{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
