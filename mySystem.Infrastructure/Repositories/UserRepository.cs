@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using mySystem.Domain.Entities;
 using mySystem.Domain.Interfaces;
 using mySystem.Infrastructure.Data;
@@ -16,36 +17,42 @@ public class UserRepository : IGeneralRepository<User>
     // -------------------------------------------
     
     // Get All:
-    public Task<IEnumerable<User>> GetAllAsync()
+    public async Task<IEnumerable<User>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Users.ToListAsync();
     }
 
     
     // Get By Id:
-    public Task<User?> GetByIdAsync(int id)
+    public async Task<User?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Users.FindAsync(id);
     }
 
     
     // Create:
-    public Task<User> CreateAsync(User entity)
+    public async Task<User> CreateAsync(User user)
     {
-        throw new NotImplementedException();
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
+        return user;
     }
 
     
     // Update:
-    public Task<User> UpdateAsync(User entity)
+    public async Task<User> UpdateAsync(User user)
     {
-        throw new NotImplementedException();
+        _context.Users.Update(user);
+        await _context.SaveChangesAsync();
+        return user;
     }
 
     
     // Delete:
-    public Task<bool> DeleteAsync(User entity)
+    public async Task<bool> DeleteAsync(User user)
     {
-        throw new NotImplementedException();
+        _context.Users.Remove(user);
+        await _context.SaveChangesAsync();
+        return true;
     }
 }

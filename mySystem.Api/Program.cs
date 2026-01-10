@@ -3,7 +3,12 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using mySystem.Application.Interfaces;
+using mySystem.Application.Services;
+using mySystem.Domain.Entities;
+using mySystem.Domain.Interfaces;
 using mySystem.Infrastructure.Extensions;
+using mySystem.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,9 +27,9 @@ builder.Services.AddEndpointsApiExplorer();
 
 // Repositories and Services
 
-// // User:
-// builder.Services.AddScoped<IGeneralRepository<User>, UserRepository>();
-// builder.Services.AddScoped<IUserService, UserService>();
+// User:
+builder.Services.AddScoped<IGeneralRepository<User>, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 //
 // // Course:
 // builder.Services.AddScoped<IGeneralRepository<Course>, CourseRepository>();
