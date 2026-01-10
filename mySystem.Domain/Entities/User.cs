@@ -11,8 +11,8 @@ public class User
     public string LastName { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string PasswordHash { get; set; } = string.Empty;
-    public bool IsActive { get; set; }
-    public Role Role { get; set; }
+    public bool IsActive { get; set; } = true;
+    public Role Role { get; set; } = Role.User;
     
     public string? RefreshToken { get; set; } 
     public DateTime? RefreshTokenExpire { get; set; }

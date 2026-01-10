@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // // Auth
-// builder.Services.AddScoped<IAuthServices, AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 // AutoMaper:
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
