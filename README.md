@@ -278,3 +278,45 @@ echo "Abriendo en Rider..."
 rider .
 
 ```
+
+
+## Docker:
+
+
+### Dockerfile:
+Once you has generated your Dockerfile you need to add the next line between EXPOSE... and FROM...
+```
+    ...
+    EXPOSE 8081
+    
+    ENV ASPNETCORE_ENVIRONMENT=Development    (=> THIS ONE)
+    
+    FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+    ...
+```
+
+### Docker Compose.yaml:
+You need to add the ports at the end of your compose.yaml
+```
+services:
+  mysystem.api:
+    image: mysystem.api
+    build:
+      context: .
+      dockerfile: mySystem.Api/Dockerfile
+    ports:                                  (=> FROM HERE...)
+      - "8080:8080"
+      - "8081:8081"
+```
+
+### Build your docker:
+On your terminarl write the next command in order to build it
+```
+docker compose up --build
+```
+
+If your compose won't work, you can write this command, and after the previous one:
+```
+docker compose up -v
+docker compose up --build
+```
