@@ -22,6 +22,36 @@ between layers is the following:
 
 <img src="./Docs/assets/DDD_architecture.png" alt="DDD architecture" width="900" height="auto">
 
+### Creating a new project: 
+Not recommended, because we can do exactly the same with the script that is further down in the bottom of this document.
+
+#### Creating project's folder:
+```
+mkdir mySystem
+cd mySystem
+```
+
+#### Creating the projects inside the folder:
+```
+dotnet new sln -n mySystem
+dotnet new webapi -n mySystem.Api
+dotnet new classlib -n mySystem.Application
+dotnet new classlib -n mySystem.Domain
+dotnet new classlib -n mySystem.Infrastructure
+```
+
+#### Add the projects to the solution (sln):
+```
+dotnet sln add mySystem.Api mySystem.Application mySystem.Domain mySystem.Infrastructure/
+```
+
+#### Creating the relationships between projects:
+```
+dotnet add mySystem.Api reference mySystem.Application/
+dotnet add mySystem.Application reference mySystem.Domain/
+dotnet add mySystem.Infrastructure/ reference mySystem.Domain/
+dotnet add mySystem.Api reference mySystem.Infrastructure/
+```
 
 ## To start migrations with EF ORM:
 
