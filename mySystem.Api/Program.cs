@@ -9,6 +9,7 @@ using mySystem.Domain.Entities;
 using mySystem.Domain.Interfaces;
 using mySystem.Infrastructure.Extensions;
 using mySystem.Infrastructure.Repositories;
+using mySystem.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,12 @@ builder.Services.AddEndpointsApiExplorer();
 // User:
 builder.Services.AddScoped<IGeneralRepository<User>, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+
+// Photos
+builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
+builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
+
 //
 // // Course:
 // builder.Services.AddScoped<IGeneralRepository<Course>, CourseRepository>();

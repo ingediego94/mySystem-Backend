@@ -21,5 +21,9 @@ public class MapProfile : Profile
         CreateMap<UserCreateDto, User>();
         CreateMap<UserUpdateDto, User>();
         CreateMap<User, UserResponseDto>();
+        
+        // Maping of Photo
+        CreateMap<Photo, PhotoResponseDto>();
+        CreateMap<PhotoResponseDto, Photo>();
     }
 }
