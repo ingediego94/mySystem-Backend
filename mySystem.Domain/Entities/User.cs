@@ -19,4 +19,9 @@ public class User
     
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+    
+    
+    // Inverse Relation:
+    public ICollection<Photo> Photos { get; set; } = new List<Photo>();
+
 }
